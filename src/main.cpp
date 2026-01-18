@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-int positive_char(const std::string& input_line,const std::string& pattern ){
+int positive_char_group(const std::string& input_line,const std::string& pattern ){
     for(char c: pattern){
         for(char i : input_line){
             if(i == c){
@@ -12,12 +12,16 @@ int positive_char(const std::string& input_line,const std::string& pattern ){
     return 0;
 }
 
-int negative_char(const std::string& input_line,const std::string& pattern ){
-    for(char c: pattern){
-        for(char i : input_line){
-            if(i != c){
-                return 1;
+int negative_char_group(const std::string& input_line,const std::string& pattern ){
+    for(char c: input_line){
+        int count =0;
+        for(char i : pattern){
+            if(i == c){
+                count++;
             }
+        }
+        if(count==0){
+            return 1;
         }
     }
     return 0;
@@ -50,10 +54,10 @@ bool match_pattern(const std::string& input_line, const std::string& pattern) {
     if((pattern.front() == '[') && (pattern.back() == ']') )
     {
         if(pattern[1]=='^'){
-                return negative_char(input_line, pattern.substr(2,pattern.length() - 3) ); 
+                return negative_char_group(input_line, pattern.substr(2,pattern.length() - 3) ); 
         }
         else
-          return positive_char(input_line, pattern.substr(1,pattern.length() - 2) ); 
+          return positive_char_group(input_line, pattern.substr(1,pattern.length() - 2) ); 
     }
 
     else {
