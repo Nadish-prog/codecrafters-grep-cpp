@@ -15,12 +15,12 @@ int positive_char(const std::string& input_line,const std::string& pattern ){
 int negative_char(const std::string& input_line,const std::string& pattern ){
     for(char c: pattern){
         for(char i : input_line){
-            if(i == c){
-                return 0;
+            if(i != c){
+                return 1;
             }
         }
     }
-    return 1;
+    return 0;
 }
 
 bool match_pattern(const std::string& input_line, const std::string& pattern) {
