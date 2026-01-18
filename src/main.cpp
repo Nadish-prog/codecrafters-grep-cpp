@@ -1,6 +1,17 @@
 #include <iostream>
 #include <string>
 
+int positive_char(const std::string& input_line, std::string& pattern ){
+    for(char c: pattern){
+        for(char i : input_line){
+            if(i == c){
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
 bool match_pattern(const std::string& input_line, const std::string& pattern) {
     if (pattern.length() == 1) {
         return input_line.find(pattern) != std::string::npos;
@@ -23,7 +34,10 @@ bool match_pattern(const std::string& input_line, const std::string& pattern) {
         }
         return false;
     }
-}
+    }
+    if((pattern.front() == '[') && (pattern.back() == ']') ){
+          return positive_char(input_line,pattern.substr(1,pattern.length() - 2)); 
+    }
     else {
         throw std::runtime_error("Unhandled pattern " + pattern);
     }
