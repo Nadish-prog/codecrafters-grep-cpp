@@ -8,7 +8,7 @@ bool match_pattern(const std::string& input_line, const std::string& pattern) {
     if(pattern.length() == 2)
     {
       if(pattern =="\\d" ){
-        for(char c : pattern){
+        for(char c : input_line){
             if(c>='0' && c<='9'){
                 return true;
             }
