@@ -94,6 +94,7 @@ bool firstRule(char s,std::string &pattern){
             return positive_char_group(std::string(1, s), pattern.substr(1, pattern.length() - 2));
         }
     }
+    
     else {
         if(s==pattern[0]){
             return true;
@@ -115,6 +116,16 @@ bool word_char_matcher(const std::string& input_line, const std::string& pattern
 bool patternChecker(std::string s, int j, std::vector<std::string>&pattern){
     int k = j;
     for(int i = 0;i<pattern.size();i++){
+        if(pattern[i] == "$"){
+            if(k == s.size()-1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+
         
         if(firstRule(s[k],pattern[i])){
             k++;
@@ -122,6 +133,7 @@ bool patternChecker(std::string s, int j, std::vector<std::string>&pattern){
         else{
           
             return false;
+        }
         }
     }
     return true;
