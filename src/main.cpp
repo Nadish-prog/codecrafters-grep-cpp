@@ -117,7 +117,7 @@ bool patternChecker(std::string s, int j, std::vector<std::string>&pattern){
     int k = j;
     for(int i = 0;i<pattern.size();i++){
         if(pattern[i] == "$"){
-            if(k == s.size()-1){
+            if(k == s.size()){
                 return true;
             }
             else{
