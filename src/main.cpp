@@ -5,6 +5,14 @@
 std::vector<std::string> parsepattern(std::string p){
     std::vector<std::string>arr;
     for(int i =0;i<p.length();i++){
+        // if(p[i]== '^'){
+        //     std::string s="";
+        //     while(p[i]!=' '){
+        //         s=s+p[i];
+        //         i++;
+        //     }
+        //      arr.push_back(s);
+        // }
         if(p[i] == '\\'){
             arr.push_back(std::string("\\")+p[i+1]);
             i++;
@@ -122,6 +130,16 @@ bool patternChecker(std::string s, int j, std::vector<std::string>&pattern){
 
 bool match_pattern(const std::string& input_line, const std::string& pattern) {
     std::vector<std::string> arr = parsepattern(pattern);
+    if(pattern[0]=='^'){
+        arr.erase(arr.begin());
+        if(patternChecker(input_line,0,arr)){
+            return true;
+        }
+        return false;
+    }
+    else{
+
+    
    for(int i = 0;i<input_line.size();i++){
      
       if(firstRule(input_line[i],arr[0])){
@@ -134,6 +152,7 @@ bool match_pattern(const std::string& input_line, const std::string& pattern) {
   }
     
     return false;
+    }
 
     // else {
     //     throw std::runtime_error("Unhandled pattern " + pattern);
